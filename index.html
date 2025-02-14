@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div class="container-title">
+      <h1 class="title">Desserts</h1>
+    </div>
     <div class="content-container">
-      <div class="container-title">
-        <h1 class="title">Desserts</h1>
-      </div>
-
       <div class="plate">
         <div class="card">
           <img src="/image/image-waffle-desktop.jpg" alt="waffle" />
@@ -51,7 +56,7 @@
         </div>
         <div class="card">
           <img src="./image/image-baklava-desktop.jpg" alt="baklava" />
-          <div>
+          <div class="content">
             <p>Baklava</p>
             <strong>Pistachio Baklava</strong>
             <p class="value">$4.00</p>
@@ -59,7 +64,7 @@
         </div>
         <div class="card">
           <img src="./image/image-meringue-desktop.jpg" alt="" />
-          <div>
+          <div class="content">
             <p>Pie</p>
             <strong>Lemon Meringue Pie</strong>
             <p class="value">$5.00</p>
@@ -67,7 +72,7 @@
         </div>
         <div class="card">
           <img src="./image/image-cake-desktop.jpg" alt="" />
-          <div>
+          <div class="content">
             <p>Cake</p>
             <strong>Red Velvet Cake</strong>
             <p class="value">$4.50</p>
@@ -75,7 +80,7 @@
         </div>
         <div class="card">
           <img src="./image/image-brownie-desktop.jpg" alt="" />
-          <div>
+          <div class="content">
             <p>Brownie</p>
             <strong>Salted Caramel Brownie</strong>
             <p class="value">$5.50</p>
@@ -83,12 +88,19 @@
         </div>
         <div class="card">
           <img src="./image/image-panna-cotta-desktop.jpg" alt="" />
-          <div>
+          <div class="content">
             <p>Panna Cotta</p>
             <strong>Vanilla Panna Cotta</strong>
             <p class="value">$6.50</p>
           </div>
         </div>
+      </div>
+      <div class="container-payment">
+        <div class="container-cart-empty">
+          <h2 class="title-empty">Your Cart(0)</h2>
+        </div>
+        <img src="./image/illustration-empty-cart.svg" alt="" />
+        <p class="cart-empty">Your added items will appear here</p>
       </div>
     </div>
   </body>
