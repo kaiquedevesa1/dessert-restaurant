@@ -40,39 +40,39 @@ body {
 }
 
 .waffle {
-  background-image: url(../image/image-waffle-desktop.jpg);
+  background-image: url(/image/image-waffle-desktop.jpg);
 }
 
 .creme-brulee {
-  background-image: url(../image/image-creme-brulee-desktop.jpg);
+  background-image: url(/image/image-creme-brulee-desktop.jpg);
 }
 
 .macaron {
-  background-image: url(../image/image-macaron-desktop.jpg);
+  background-image: url(/image/image-macaron-desktop.jpg);
 }
 
 .tiramisu {
-  background-image: url(../image/image-tiramisu-desktop.jpg);
+  background-image: url(/image/image-tiramisu-desktop.jpg);
 }
 
 .baklava {
-  background-image: url(../image/image-baklava-desktop.jpg);
+  background-image: url(/image/image-baklava-desktop.jpg);
 }
 
 .pie {
-  background-image: url(../image/image-meringue-desktop.jpg);
+  background-image: url(/image/image-meringue-desktop.jpg);
 }
 
 .cake {
-  background-image: url(../image/image-cake-desktop.jpg);
+  background-image: url(/image/image-cake-desktop.jpg);
 }
 
 .brownie {
-  background-image: url(../image/image-brownie-desktop.jpg);
+  background-image: url(/image/image-brownie-desktop.jpg);
 }
 
 .panna-cotta {
-  background-image: url(../image/image-panna-cotta-desktop.jpg);
+  background-image: url(/image/image-panna-cotta-desktop.jpg);
 }
 
 .container-btn {
