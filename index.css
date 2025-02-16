@@ -10,7 +10,7 @@ body {
 }
 
 .container-title {
-  padding: 0 0px 30px 100px;
+  padding: 70px 0px 30px 100px;
 }
 
 .content-container {
@@ -22,22 +22,96 @@ body {
 .plate {
   display: grid;
   grid-template-columns: repeat(3, 0.5fr);
-  width: 50%;
+  padding: 0 30px 30px 0;
 }
 
 .card {
-  padding: 0 30px 0 0;
-  width: 70%;
+  padding: 0 15px 0 0;
+  width: 100%;
+}
+
+.container-img {
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 180px;
+  width: 188px;
+  border-radius: 10px;
+  position: relative; /
+}
+
+.waffle {
+  background-image: url(../image/image-waffle-desktop.jpg);
+}
+
+.creme-brulee {
+  background-image: url(../image/image-creme-brulee-desktop.jpg);
+}
+
+.macaron {
+  background-image: url(../image/image-macaron-desktop.jpg);
+}
+
+.tiramisu {
+  background-image: url(../image/image-tiramisu-desktop.jpg);
+}
+
+.baklava {
+  background-image: url(../image/image-baklava-desktop.jpg);
+}
+
+.pie {
+  background-image: url(../image/image-meringue-desktop.jpg);
+}
+
+.cake {
+  background-image: url(../image/image-cake-desktop.jpg);
+}
+
+.brownie {
+  background-image: url(../image/image-brownie-desktop.jpg);
+}
+
+.panna-cotta {
+  background-image: url(../image/image-panna-cotta-desktop.jpg);
+}
+
+.container-btn {
+  position: absolute;
+  top: 165px; 
+  left: 50%; 
+  transform: translateX(-50%);
+  border: solid 1px #c73a0f;
+  border-radius: 30px;
+  width: 100px;
+  background-color: #f4edeb ;
+  padding: 5px 15px;
+}
+
+.btn-add{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-add img{
+  width: 20px;
+}
+
+button {
+  border: none;
+  padding: 4px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  width: 100%;
 }
 
 .value {
   color: #c73a0f;
 }
 
-.card img {
-  border-radius: 10px;
-  width: 100%;
-}
+
 
 .content {
   padding: 30px 0 30px 0px;
@@ -51,9 +125,10 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 250px;
+  height: 230px;
   width: 300px;
   background-color: #fcf9f7;
+  border-radius: 5px;
 }
 
 .container-cart-empty {
