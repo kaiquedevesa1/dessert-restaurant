@@ -94,6 +94,10 @@ body {
   gap: 10px;
 }
 
+.click {
+  background-color: #c73a0f;
+}
+
 .btn-add img {
   width: 20px;
 }
