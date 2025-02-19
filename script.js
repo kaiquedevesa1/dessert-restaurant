@@ -1,16 +1,21 @@
-const btnAdd = document.querySelectorAll(".container-btn");
 let count = 0;
 
-function handleButtonClick(button) {
-  button.classList.add("click");
-  count++;
-  console.log(count);
-}
+function handleClick(e) {
+  const btnAdd = document.querySelectorAll(".container-btn");
 
-btnAdd.forEach((button) => {
-  button.addEventListener("click", function () {
-    handleButtonClick(button);
+  btnAdd.forEach((add) => {
+    add.classList.remove("click");
   });
 
-  button.classList.remove("click");
+  e.currentTarget.classList.add("click");
+
+  let eClick = document.querySelectorAll("add-cart");
+
+  eClick.innerHTML = `<div>${count}</div>`;
+}
+
+const btnAdd = document.querySelectorAll(".container-btn");
+
+btnAdd.forEach((add) => {
+  add.addEventListener("click", handleClick);
 });
