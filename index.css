@@ -94,6 +94,29 @@ body {
   gap: 10px;
 }
 
+.add-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 5px 15px;
+  width: 100%;
+}
+
+.container-decrement {
+  display: flex;
+  border: solid #fff 1px;
+  border-radius: 100%;
+
+  padding: 5px;
+}
+
+.container-increment {
+  display: flex;
+  border: solid #fff 1px;
+  border-radius: 50%;
+}
+
 .click {
   background-color: #c73a0f;
 }
