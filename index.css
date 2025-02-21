@@ -82,47 +82,58 @@ body {
   transform: translateX(-50%);
   border: solid 1px #c73a0f;
   border-radius: 30px;
-  width: 100px;
   background-color: #f4edeb;
   padding: 5px 15px;
+  width: 100px;
 }
 
 .btn-add {
   display: flex;
   width: 100%;
   align-items: center;
+
   gap: 10px;
+}
+
+.btn-add img {
+  width: 15px;
 }
 
 .add-item {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 30px;
-  padding: 5px 15px;
   width: 100%;
 }
 
 .container-decrement {
-  display: flex;
   border: solid #fff 1px;
   border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
 
-  padding: 5px;
+.container-decrement img {
+  width: 10px;
 }
 
 .container-increment {
-  display: flex;
   border: solid #fff 1px;
-  border-radius: 50%;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-increment img {
+  width: 10px;
 }
 
 .click {
   background-color: #c73a0f;
-}
-
-.btn-add img {
-  width: 20px;
 }
 
 button {

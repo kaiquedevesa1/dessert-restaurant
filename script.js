@@ -1,31 +1,45 @@
 function handleClick(e) {
-  // Seleciona todos os botões
-  const btnAdd = document.querySelectorAll(".container-btn");
+  const btnAdd = e.currentTarget;
 
-  // Remove a classe “click” de todos
+  btnAdd.classList.add("click");
 
-  // Adiciona a classe “click” ao botão atual
-  e.currentTarget.classList.add("click");
+  if (!btnAdd.querySelector(".add-item")) {
+    btnAdd.innerHTML = "";
 
-  // Obtenha o contador atual do botão clicado ou inicialize em 0
+    btnAdd.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class='add-item'>
+          <div class='container-decrement'>
+              <img class='decrement' src='./image/icon-decrement-quantity.svg'/>
+          </div>
+          <div class='quantity'>
+              1
+          </div>
+          <div class='container-increment'>
+              <img class="increment" src="./image/icon-increment-quantity.svg" /> 
+          </div>  
+      </div>`
+    );
 
-  // Atualiza o HTML do botão com o novo contador
-  e.currentTarget.innerHTML = `<div class='add-item'>
-    <div class= 'container-decrement'>
-        <img  class='decrement' src='./image/icon-decrement-quantity.svg'/>
-    </div>
-    <div>
-      1
-    </div>
-    
-    <div class='container-increment'>
-      <img class="increment" src="./image/icon-increment-quantity.svg" />
-       
-      </div>
-  <div/>`;
+    const decrementBtn = btnAdd.querySelector(".decrement");
+    const incrementBtn = btnAdd.querySelector(".increment");
+    const quantityDisplay = btnAdd.querySelector(".quantity");
+
+    decrementBtn.addEventListener("click", () => {
+      let currentValue = parseInt(quantityDisplay.textContent);
+      if (currentValue > 1) {
+        quantityDisplay.textContent = currentValue - 1;
+      }
+    });
+
+    incrementBtn.addEventListener("click", () => {
+      let currentValue = parseInt(quantityDisplay.textContent);
+      quantityDisplay.textContent = currentValue + 1;
+    });
+  }
 }
 
-// Seleciona todos os botões e adiciona o evento de click
 const btnAdd = document.querySelectorAll(".container-btn");
 
 btnAdd.forEach((add) => {
