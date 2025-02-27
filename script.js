@@ -1,4 +1,5 @@
-const cartItems = [];
+const cartItems = []; // Agora será um array de objetos
+
 function handleClick(e) {
   const btnAdd = e.currentTarget;
 
@@ -8,7 +9,7 @@ function handleClick(e) {
 
   const item = {
     id: btnAdd.dataset.id,
-    name: btnAdd.dataset.name || "Item",
+    name: btnAdd.dataset.name, // Obtém o nome correto da comida
     quantity: 1,
   };
 
@@ -81,7 +82,7 @@ function updateCartDisplay() {
     cartContainer.innerHTML = `
       <div class="cart-items">
         <h2>Your Cart (${cartItems.length})</h2>
-        <ul>
+        <ul class= 'food'>
           ${cartItems
             .map(
               (item) => `
@@ -96,6 +97,13 @@ function updateCartDisplay() {
   }
 }
 
-document.querySelectorAll(".container-btn").forEach((btn) => {
+// Adiciona os eventos aos botões corretamente
+document.querySelectorAll(".container-btn").forEach((btn, index) => {
+  // Define um ID único para cada botão
+  btn.dataset.name = btn
+    .closest(".card")
+    .querySelector(".content strong")
+    .textContent.trim(); // Pega o nome do item
+
   btn.addEventListener("click", handleClick);
 });

@@ -190,3 +190,20 @@ button {
 .cart-empty {
   color: #ad8985;
 }
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px 0;
+}
+
+.food {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cart-items h2 {
+  color: #c73a0f;
+}
