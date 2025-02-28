@@ -1,4 +1,4 @@
-const cartItems = []; // Agora será um array de objetos
+const cartItems = [];
 
 function handleClick(e) {
   const btnAdd = e.currentTarget;
@@ -7,13 +7,31 @@ function handleClick(e) {
 
   btnAdd.classList.add("click");
 
-  const item = {
-    id: btnAdd.dataset.id,
-    name: btnAdd.dataset.name, // Obtém o nome correto da comida
-    quantity: 1,
-  };
+  const itemId = btnAdd.dataset.id;
+  const itemName = btnAdd.dataset.name;
 
-  cartItems.push(item);
+  if (!itemId || !itemName) {
+    const card = btnAdd.closest(".card");
+    if (card) {
+      btnAdd.dataset.id = itemId || Math.random().toString(36).substr(2, 9);
+      btnAdd.dataset.name =
+        itemName || card.querySelector(".content strong").textContent.trim();
+    }
+  }
+
+  let cartItem = cartItems.find((i) => i.id === btnAdd.dataset.id);
+
+  if (cartItem) {
+    cartItem.quantity++;
+  } else {
+    cartItem = {
+      id: btnAdd.dataset.id,
+      name: btnAdd.dataset.name,
+      quantity: 1,
+    };
+    cartItems.push(cartItem);
+  }
+
   updateCartDisplay();
 
   btnAdd.innerHTML = `
@@ -21,8 +39,8 @@ function handleClick(e) {
         <div class='container-decrement'>
             <img class='decrement' src='./image/icon-decrement-quantity.svg'/>
         </div>
-        <div class='quantity'>1</div>
-        <div class='container-increment increment'>
+        <div class='quantity'>${cartItem.quantity}</div>
+        <div class='container-increment'>
             <img class="increment" src="./image/icon-increment-quantity.svg" /> 
         </div>  
     </div>`;
@@ -31,38 +49,41 @@ function handleClick(e) {
   const incrementBtn = btnAdd.querySelector(".container-increment");
   const quantityDisplay = btnAdd.querySelector(".quantity");
 
-  decrementBtn.addEventListener("click", (event) => {
-    event.stopPropagation();
-    let currentValue = parseInt(quantityDisplay.textContent);
+  decrementBtn.replaceWith(decrementBtn.cloneNode(true));
+  incrementBtn.replaceWith(incrementBtn.cloneNode(true));
 
-    if (currentValue > 1) {
-      quantityDisplay.textContent = currentValue - 1;
-      const cartItem = cartItems.find((i) => i.id === item.id);
-      if (cartItem) cartItem.quantity--;
+  const newDecrementBtn = btnAdd.querySelector(".container-decrement");
+  const newIncrementBtn = btnAdd.querySelector(".container-increment");
+
+  newDecrementBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
+      quantityDisplay.textContent = cartItem.quantity;
     } else {
-      cartItems.splice(cartItems.indexOf(item), 1);
+      const index = cartItems.findIndex((i) => i.id === cartItem.id);
+      if (index !== -1) {
+        cartItems.splice(index, 1);
+      }
+
+      updateCartDisplay();
       btnAdd.classList.remove("click");
       btnAdd.innerHTML = `
         <button class="btn-add">
-          <img src="./image/icon-add-to-cart.svg" alt="add cart" />
-          <span class="add-cart">Add Cart</span>
+            <img src="./image/icon-add-to-cart.svg" alt="add cart" />
+            <span class="add-cart">Add Cart</span>
         </button>
       `;
 
       btnAdd.querySelector(".btn-add").addEventListener("click", handleClick);
     }
-
     updateCartDisplay();
   });
 
-  incrementBtn.addEventListener("click", (event) => {
+  newIncrementBtn.addEventListener("click", (event) => {
     event.stopPropagation();
-    let currentValue = parseInt(quantityDisplay.textContent);
-    quantityDisplay.textContent = currentValue + 1;
-
-    const cartItem = cartItems.find((i) => i.id === item.id);
-    if (cartItem) cartItem.quantity++;
-
+    cartItem.quantity++;
+    quantityDisplay.textContent = cartItem.quantity;
     updateCartDisplay();
   });
 }
@@ -81,11 +102,15 @@ function updateCartDisplay() {
   } else {
     cartContainer.innerHTML = `
       <div class="cart-items">
-        <h2>Your Cart (${cartItems.length})</h2>
-        <ul class= 'food'>
+        <h2>Your Cart (${cartItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        )})</h2>
+        <ul class='food'>
           ${cartItems
             .map(
-              (item) => `
+              (item) =>
+                `
             <li>
               ${item.name} - Quantity: ${item.quantity}
             </li>`
@@ -97,13 +122,11 @@ function updateCartDisplay() {
   }
 }
 
-// Adiciona os eventos aos botões corretamente
-document.querySelectorAll(".container-btn").forEach((btn, index) => {
-  // Define um ID único para cada botão
+document.querySelectorAll(".container-btn").forEach((btn) => {
   btn.dataset.name = btn
     .closest(".card")
     .querySelector(".content strong")
-    .textContent.trim(); // Pega o nome do item
+    .textContent.trim();
 
   btn.addEventListener("click", handleClick);
 });

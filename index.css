@@ -175,7 +175,6 @@ button {
   background-color: #fcf9f7;
   border-radius: 5px;
 }
-
 .container-cart-empty {
   display: flex;
   justify-content: flex-start;
@@ -196,14 +195,22 @@ button {
   flex-direction: column;
   gap: 30px;
   padding: 10px 0;
+  height: 300px;
+  font-size: 12px;
+}
+
+.cart-items h2 {
+  color: #c73a0f;
 }
 
 .food {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  list-style: none;
 }
 
-.cart-items h2 {
-  color: #c73a0f;
+.food li {
+  border-bottom: solid #c9bfbc 1px;
+  padding: 10px 10px;
 }
