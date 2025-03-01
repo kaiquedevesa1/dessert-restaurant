@@ -10,26 +10,27 @@ function handleClick(e) {
   const itemId = btnAdd.dataset.id;
   const itemName = btnAdd.dataset.name;
 
-  if (!itemId || !itemName) {
-    const card = btnAdd.closest(".card");
-    if (card) {
-      btnAdd.dataset.id = itemId || Math.random().toString(36).substr(2, 9);
-      btnAdd.dataset.name =
-        itemName || card.querySelector(".content strong").textContent.trim();
-    }
+  const card = btnAdd.closest(".card");
+  if (card) {
+    const fixedId = card.dataset.id || Math.random().toString(36).substr(2, 9);
+    card.dataset.id = fixedId; // Garante que o ID do item seja sempre o mesmo
+    btnAdd.dataset.id = fixedId;
+    btnAdd.dataset.name = card
+      .querySelector(".content strong")
+      .textContent.trim();
   }
 
   let cartItem = cartItems.find((i) => i.id === btnAdd.dataset.id);
 
-  if (cartItem) {
-    cartItem.quantity++;
-  } else {
+  if (!cartItem) {
     cartItem = {
       id: btnAdd.dataset.id,
       name: btnAdd.dataset.name,
-      quantity: 1,
+      quantity: 1, // Sempre inicia com 1 ao adicionar de novo
     };
     cartItems.push(cartItem);
+  } else {
+    cartItem.quantity = 1; // Garante que ao adicionar de novo, comece do zero
   }
 
   updateCartDisplay();
@@ -64,10 +65,14 @@ function handleClick(e) {
       const index = cartItems.findIndex((i) => i.id === cartItem.id);
       if (index !== -1) {
         cartItems.splice(index, 1);
+        updateCartDisplay();
       }
 
       updateCartDisplay();
       btnAdd.classList.remove("click");
+      btnAdd.removeAttribute("data-id"); // Resetando o ID ao remover do carrinho
+      btnAdd.removeAttribute("data-name");
+
       btnAdd.innerHTML = `
         <button class="btn-add">
             <img src="./image/icon-add-to-cart.svg" alt="add cart" />
@@ -95,17 +100,23 @@ function updateCartDisplay() {
     cartContainer.innerHTML = `
       <div class="container-cart-empty">
         <h2 class="title-empty">Your Cart(0)</h2>
-      </div>
-      <img src="../image/illustration-empty-cart.svg" alt="" />
-      <p class="cart-empty">Your added items will appear here</p>
+        </div>
+        <div  class="cart-empty">
+          <img src="../image/illustration-empty-cart.svg" alt="" />
+          <p>Your added items will appear here</p>
+        </div>
     `;
   } else {
     cartContainer.innerHTML = `
-      <div class="cart-items">
+    <div class="container-payment-cart">
+      
+      <div class="cart-items-quantity">
         <h2>Your Cart (${cartItems.reduce(
           (total, item) => total + item.quantity,
           0
         )})</h2>
+      </div>
+      <div class="container-food">
         <ul class='food'>
           ${cartItems
             .map(
@@ -117,8 +128,9 @@ function updateCartDisplay() {
             )
             .join("")}
         </ul>
-      </div>
-    `;
+        </div>
+      
+    <div>`;
   }
 }
 

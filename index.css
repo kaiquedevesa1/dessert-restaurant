@@ -16,7 +16,6 @@ body {
 .content-container {
   padding: 0 0px 0px 100px;
   display: flex;
-  width: 100%;
 }
 
 .plate {
@@ -170,15 +169,23 @@ button {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 230px;
+  height: 100%;
+  max-height: 230px;
   width: 300px;
   background-color: #fcf9f7;
   border-radius: 5px;
 }
+
 .container-cart-empty {
   display: flex;
   justify-content: flex-start;
   width: 100%;
+}
+
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 15px 0px;
 }
 
 .title-empty {
@@ -188,19 +195,33 @@ button {
 
 .cart-empty {
   color: #ad8985;
-}
-
-.cart-items {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 10px 0;
-  height: 300px;
-  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.cart-items h2 {
+.container-items {
+  height: 100%;
+}
+
+.container-payment-cart {
+  height: auto;
+  width: 100%;
+}
+
+.cart-items-quantity {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 10px 0px 0px 20px;
+}
+
+.cart-items-quantity h2 {
   color: #c73a0f;
+  font-size: 1.5em;
 }
 
 .food {
@@ -212,5 +233,6 @@ button {
 
 .food li {
   border-bottom: solid #c9bfbc 1px;
-  padding: 10px 10px;
+  padding: 10px 20px;
+  font-size: 12px;
 }
