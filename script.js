@@ -100,37 +100,44 @@ function updateCartDisplay() {
     cartContainer.innerHTML = `
       <div class="container-cart-empty">
         <h2 class="title-empty">Your Cart(0)</h2>
-        </div>
-        <div  class="cart-empty">
-          <img src="../image/illustration-empty-cart.svg" alt="" />
-          <p>Your added items will appear here</p>
-        </div>
+      </div>
+      <div class="cart-empty">
+        <img src="../image/illustration-empty-cart.svg" alt="" />
+        <p>Your added items will appear here</p>
+      </div>
     `;
   } else {
     cartContainer.innerHTML = `
-    <div class="container-payment-cart">
-      
-      <div class="cart-items-quantity">
-        <h2>Your Cart (${cartItems.reduce(
-          (total, item) => total + item.quantity,
-          0
-        )})</h2>
-      </div>
-      <div class="container-food">
-        <ul class='food'>
-          ${cartItems
-            .map(
-              (item) =>
-                `
-            <li>
-              ${item.name} - Quantity: ${item.quantity}
-            </li>`
-            )
-            .join("")}
-        </ul>
+      <div class="container-payment-cart">
+        <div class="cart-items-quantity">
+          <h2>Your Cart (${cartItems.reduce(
+            (total, item) => total + item.quantity,
+            0
+          )})</h2>
         </div>
-      
-    <div>`;
+        <div class="cart-items-container">
+          <ul class='food'>
+            ${cartItems
+              .map(
+                (item) =>
+                  `<li class="cart-item">
+                    ${item.name} - Quantity: ${item.quantity}
+                  </li>`
+              )
+              .join("")}
+          </ul>
+        </div>
+
+        <div class="total">
+              <p >Order Total:</p>
+              <p> $${
+                cartItems.reduce((total, item) => total + item.quantity, 0) *
+                6.5
+              }
+              </p>
+        </div>
+      </div>
+    `;
   }
 }
 

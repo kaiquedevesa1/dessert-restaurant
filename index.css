@@ -16,6 +16,7 @@ body {
 .content-container {
   padding: 0 0px 0px 100px;
   display: flex;
+  align-items: flex-start;
 }
 
 .plate {
@@ -166,14 +167,16 @@ button {
 }
 
 .container-payment {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-  max-height: 230px;
   width: 300px;
   background-color: #fcf9f7;
   border-radius: 5px;
+  min-height: 200px; /* Altura mínima */
+
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out; /* Suaviza a mudança de altura */
+  overflow: visible; /* Permite que o conteúdo seja visível */
 }
 
 .container-cart-empty {
@@ -202,13 +205,11 @@ button {
   gap: 10px;
 }
 
-.container-items {
-  height: 100%;
-}
-
 .container-payment-cart {
+  display: flex;
+  flex-direction: column;
   height: auto;
-  width: 100%;
+  flex-grow: 1;
 }
 
 .cart-items-quantity {
@@ -223,6 +224,17 @@ button {
   color: #c73a0f;
   font-size: 1.5em;
 }
+.cart-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container-food {
+  min-height: 100px; /* Mantém um espaço mínimo, mas permite crescimento */
+  height: auto; /* Cresce conforme os itens são adicionados */
+  max-width: 100%;
+}
 
 .food {
   display: flex;
@@ -235,4 +247,11 @@ button {
   border-bottom: solid #c9bfbc 1px;
   padding: 10px 20px;
   font-size: 12px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 10px 20px;
 }
