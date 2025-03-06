@@ -7,17 +7,20 @@ function handleClick(e) {
 
   btnAdd.classList.add("click");
 
-  const itemId = btnAdd.dataset.id;
-  const itemName = btnAdd.dataset.name;
-
   const card = btnAdd.closest(".card");
   if (card) {
     const fixedId = card.dataset.id || Math.random().toString(36).substr(2, 9);
-    card.dataset.id = fixedId; // Garante que o ID do item seja sempre o mesmo
+    card.dataset.id = fixedId;
     btnAdd.dataset.id = fixedId;
     btnAdd.dataset.name = card
       .querySelector(".content strong")
       .textContent.trim();
+
+    // Pega o preço do produto
+    const itemPrice = parseFloat(
+      card.querySelector(".value").textContent.replace("$", "")
+    );
+    btnAdd.dataset.price = itemPrice; // Salva o preço no botão
   }
 
   let cartItem = cartItems.find((i) => i.id === btnAdd.dataset.id);
@@ -26,11 +29,12 @@ function handleClick(e) {
     cartItem = {
       id: btnAdd.dataset.id,
       name: btnAdd.dataset.name,
-      quantity: 1, // Sempre inicia com 1 ao adicionar de novo
+      quantity: 1,
+      price: parseFloat(btnAdd.dataset.price), // Adiciona o preço
     };
     cartItems.push(cartItem);
   } else {
-    cartItem.quantity = 1; // Garante que ao adicionar de novo, comece do zero
+    cartItem.quantity = 1;
   }
 
   updateCartDisplay();
@@ -70,7 +74,7 @@ function handleClick(e) {
 
       updateCartDisplay();
       btnAdd.classList.remove("click");
-      btnAdd.removeAttribute("data-id"); // Resetando o ID ao remover do carrinho
+      btnAdd.removeAttribute("data-id");
       btnAdd.removeAttribute("data-name");
 
       btnAdd.innerHTML = `
@@ -107,6 +111,11 @@ function updateCartDisplay() {
       </div>
     `;
   } else {
+    const totalOrder = cartItems.reduce(
+      (total, item) => total + item.quantity * item.price,
+      0
+    );
+
     cartContainer.innerHTML = `
       <div class="container-payment-cart">
         <div class="cart-items-quantity">
@@ -115,26 +124,26 @@ function updateCartDisplay() {
             0
           )})</h2>
         </div>
-        <div class="cart-items-container">
+       
           <ul class='food'>
-            ${cartItems
-              .map(
-                (item) =>
-                  `<li class="cart-item">
-                    ${item.name} - Quantity: ${item.quantity}
-                  </li>`
-              )
-              .join("")}
-          </ul>
-        </div>
+  ${cartItems
+    .map(
+      (item) =>
+        `<li class="cart-item">
+          ${item.name}  
+          <span class="quantity"> ${item.quantity} x $${item.price.toFixed(
+          2
+        )} | $${(item.quantity * item.price).toFixed(2)}</span>
+        </li>`
+    )
+    .join("")}
+</ul>
+
+        
 
         <div class="total">
-              <p >Order Total:</p>
-              <p> $${
-                cartItems.reduce((total, item) => total + item.quantity, 0) *
-                6.5
-              }
-              </p>
+              <p>Order Total:</p>
+              <p>$${totalOrder.toFixed(2)}</p>
         </div>
       </div>
     `;

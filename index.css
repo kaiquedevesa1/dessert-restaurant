@@ -170,13 +170,13 @@ button {
   width: 300px;
   background-color: #fcf9f7;
   border-radius: 5px;
-  min-height: 200px; /* Altura mínima */
+  min-height: 200px;
 
   padding: 10px;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease-in-out; /* Suaviza a mudança de altura */
-  overflow: visible; /* Permite que o conteúdo seja visível */
+  transition: all 0.3s ease-in-out;
+  overflow: visible;
 }
 
 .container-cart-empty {
@@ -224,23 +224,25 @@ button {
   color: #c73a0f;
   font-size: 1.5em;
 }
-.cart-items-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 
 .container-food {
-  min-height: 100px; /* Mantém um espaço mínimo, mas permite crescimento */
-  height: auto; /* Cresce conforme os itens são adicionados */
+  min-height: 100px;
+  height: auto;
   max-width: 100%;
 }
 
 .food {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
   list-style: none;
+}
+
+.cart-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .food li {
@@ -252,6 +254,5 @@ button {
 .total {
   display: flex;
   justify-content: space-between;
-
   padding: 10px 20px;
 }
