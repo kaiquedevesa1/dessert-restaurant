@@ -106,7 +106,7 @@ function updateCartDisplay() {
         <h2 class="title-empty">Your Cart(0)</h2>
       </div>
       <div class="cart-empty">
-        <img src="../image/illustration-empty-cart.svg" alt="" />
+        <img src="./image/illustration-empty-cart.svg" alt="" />
         <p>Your added items will appear here</p>
       </div>
     `;
