@@ -125,21 +125,35 @@ function updateCartDisplay() {
           )})</h2>
         </div>
        
-          <ul class='food'>
+        
+        
+        <ul class='food'>
   ${cartItems
     .map(
       (item) =>
         `<li class="cart-item">
           ${item.name}  
-          <span class="quantity"> ${item.quantity} x $${item.price.toFixed(
-          2
-        )} | $${(item.quantity * item.price).toFixed(2)}</span>
-        </li>`
+          
+          <div>
+          <span class="payment-quantity"> ${item.quantity} x </span>
+          
+          <span class="price">$${item.price.toFixed(2)}  $${(
+          item.quantity * item.price
+        ).toFixed(2)}</span>
+          </div>
+
+
+          
+        </li>
+         <div class="button-remove"> 
+            <img src ="./image/icon-remove-item.svg" class ="remove-item"> 
+         </div> 
+        `
     )
     .join("")}
-</ul>
-
-        
+    
+    
+      </ul>
 
         <div class="total">
               <p>Order Total:</p>

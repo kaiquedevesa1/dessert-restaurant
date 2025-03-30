@@ -32,9 +32,9 @@ body {
 
 .container-img {
   background-repeat: no-repeat;
-  background-size: contain;
-  height: 180px;
-  width: 188px;
+  background-size: cover;
+  height: 260px;
+  width: 300px;
   border-radius: 10px;
   position: relative;
 }
@@ -77,13 +77,13 @@ body {
 
 .container-btn {
   position: absolute;
-  top: 165px;
+  top: 250px;
   left: 50%;
   transform: translateX(-50%);
   border: solid 1px #c73a0f;
   border-radius: 30px;
   background-color: #f4edeb;
-  padding: 5px 15px;
+  padding: 5px 20px;
   width: 100px;
 }
 
@@ -171,7 +171,6 @@ button {
   background-color: #fcf9f7;
   border-radius: 5px;
   min-height: 200px;
-
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -234,21 +233,60 @@ button {
 .food {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  align-items: center;
   gap: 20px;
   list-style: none;
-}
-
-.cart-item {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 
 .food li {
-  border-bottom: solid #c9bfbc 1px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   padding: 10px 20px;
   font-size: 12px;
+  border-bottom: solid #c9bfbc 1px;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+}
+
+.quantity-price {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-quantity {
+  color: #c73a0f;
+}
+
+.price {
+  color: #c9bfbc;
+}
+
+.remove-item {
+  width: 10px;
+  height: 10px;
+}
+
+.remove-item:hover {
+}
+
+.button-remove {
+  display: flex;
+  padding: 3px;
+  width: 10px;
+  height: 10px;
+  border: #c9bfbc solid 1px;
+  border-radius: 50%;
+}
+
+.button-remove:hover {
+  filter: brightness(0) saturate(100%) invert(14%) sepia(88%) saturate(497%)
+    hue-rotate(345deg) brightness(72%) contrast(93%);
 }
 
 .total {
