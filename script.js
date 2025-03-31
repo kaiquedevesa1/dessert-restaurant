@@ -131,23 +131,26 @@ function updateCartDisplay() {
   ${cartItems
     .map(
       (item) =>
-        `<li class="cart-item">
+        `
+      <div class="container-cart">
+         <li class="cart-item">
           ${item.name}  
           
-          <div>
+          <div class="price-quantity">
           <span class="payment-quantity"> ${item.quantity} x </span>
           
           <span class="price">$${item.price.toFixed(2)}  $${(
           item.quantity * item.price
         ).toFixed(2)}</span>
           </div>
-
-
-          
         </li>
-         <div class="button-remove"> 
+         <div class="button-remove" onclick="removeItem()" > 
             <img src ="./image/icon-remove-item.svg" class ="remove-item"> 
          </div> 
+
+      </div>
+     
+        
         `
     )
     .join("")}
@@ -156,9 +159,21 @@ function updateCartDisplay() {
       </ul>
 
         <div class="total">
-              <p>Order Total:</p>
-              <p>$${totalOrder.toFixed(2)}</p>
+              <p class="order">Order Total:</p>
+              <p class="total-price">$${totalOrder.toFixed(2)}</p>
         </div>
+      </div>
+
+
+
+      <div class= "carbon">
+        <img src="/image/icon-carbon-neutral.svg"
+        <p>This is a <span>carbon-neutral</span> delivery</p>
+      </div>
+
+
+      <div class="confirm-order">
+        <button>Confirm Order </div>
       </div>
     `;
   }
