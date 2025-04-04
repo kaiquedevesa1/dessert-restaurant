@@ -1,4 +1,4 @@
-const cartItems = [];
+let cartItems = [];
 
 function handleClick(e) {
   const btnAdd = e.currentTarget;
@@ -15,7 +15,6 @@ function handleClick(e) {
     btnAdd.dataset.name = card
       .querySelector(".content strong")
       .textContent.trim();
-
     const itemPrice = parseFloat(
       card.querySelector(".value").textContent.replace("$", "")
     );
@@ -32,6 +31,8 @@ function handleClick(e) {
       price: parseFloat(btnAdd.dataset.price),
     };
     cartItems.push(cartItem);
+  } else {
+    cartItem.quantity = 1;
   }
 
   updateCartDisplay();
@@ -39,6 +40,8 @@ function handleClick(e) {
 }
 
 function updateButton(btnAdd, cartItem) {
+  btnAdd.classList.add("click");
+
   btnAdd.innerHTML = `
     <div class='add-item'>
         <div class='container-decrement'>
@@ -50,61 +53,55 @@ function updateButton(btnAdd, cartItem) {
         </div>  
     </div>`;
 
-  btnAdd
-    .querySelector(".container-decrement")
-    .addEventListener("click", (event) => {
-      event.stopPropagation();
-      if (cartItem.quantity > 1) {
-        cartItem.quantity--;
-      } else {
-        removeItem(cartItem.id);
-      }
-      updateCartDisplay();
-    });
+  const decrementBtn = btnAdd.querySelector(".container-decrement");
+  const incrementBtn = btnAdd.querySelector(".container-increment");
 
-  btnAdd
-    .querySelector(".container-increment")
-    .addEventListener("click", (event) => {
-      event.stopPropagation();
-      cartItem.quantity++;
-      updateCartDisplay();
-    });
+  decrementBtn.replaceWith(decrementBtn.cloneNode(true));
+  incrementBtn.replaceWith(incrementBtn.cloneNode(true));
+
+  const newDecrementBtn = btnAdd.querySelector(".container-decrement");
+  const newIncrementBtn = btnAdd.querySelector(".container-increment");
+
+  newDecrementBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
+    } else {
+      removeItem(cartItem.id);
+      return;
+    }
+    updateCartDisplay();
+    updateButton(btnAdd, cartItem);
+  });
+
+  newIncrementBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    cartItem.quantity++;
+    updateCartDisplay();
+    updateButton(btnAdd, cartItem);
+  });
 }
 
 function removeItem(id) {
-  const index = cartItems.findIndex((item) => item.id === id);
-  if (index !== -1) {
-    cartItems.splice(index, 1);
-    updateCartDisplay();
-  }
+  cartItems = cartItems.filter((item) => item.id !== id);
+
+  updateCartDisplay();
 
   const btnAdd = document.querySelector(`.container-btn[data-id="${id}"]`);
   if (btnAdd) {
     btnAdd.classList.remove("click");
     btnAdd.removeAttribute("data-id");
     btnAdd.removeAttribute("data-name");
-    if (cartItems.length === 0) {
-      btnAdd.innerHTML = `
-        <button class="btn-add">
-          <img src="./image/icon-add-to-cart.svg" alt="add cart" />
-          <span class="add-cart">Add Cart</span>
-        </button>
-      `;
-      btnAdd.querySelector(".btn-add").addEventListener("click", handleClick);
-    } else {
-      btnAdd.innerHTML = `
-        <div class='add-item'>
-            <div class='container-decrement'>
-                <img class='decrement' src='./image/icon-decrement-quantity.svg'/>
-            </div>
-            <div class='quantity'>${
-              cartItems.find((item) => item.id === id).quantity
-            }</div>
-            <div class='container-increment'>
-                <img class="increment" src="./image/icon-increment-quantity.svg" /> 
-            </div>  
-        </div>`;
-    }
+    btnAdd.removeAttribute("data-price");
+
+    btnAdd.innerHTML = `
+      <button class="btn-add">
+        <img src="./image/icon-add-to-cart.svg" alt="add cart" />
+        <span class="add-cart">Add Cart</span>
+      </button>
+    `;
+
+    btnAdd.querySelector(".btn-add").addEventListener("click", handleClick);
   }
 }
 
@@ -167,7 +164,50 @@ function updateCartDisplay() {
         <button>Confirm Order</button>
       </div>
     `;
+
+    document
+      .querySelector(".confirm-order button")
+      ?.addEventListener("click", confirmOrder);
   }
+}
+
+function confirmOrder() {
+  if (cartItems.length === 0) {
+    alert(
+      "Seu carrinho está vazio! Adicione itens antes de confirmar o pedido."
+    );
+    return;
+  }
+
+  const modal = document.getElementById("modalConfirmation");
+  modal.style.display = "flex";
+
+  const closeModalButton = document.getElementById("closeModal");
+
+  closeModalButton.replaceWith(closeModalButton.cloneNode(true));
+
+  document.getElementById("closeModal").addEventListener("click", () => {
+    modal.style.display = "none";
+
+    cartItems = [];
+    updateCartDisplay();
+
+    document.querySelectorAll(".container-btn").forEach((btn) => {
+      btn.classList.remove("click");
+      btn.removeAttribute("data-id");
+      btn.removeAttribute("data-name");
+      btn.removeAttribute("data-price");
+
+      btn.innerHTML = `
+        <button class="btn-add">
+          <img src="./image/icon-add-to-cart.svg" alt="add cart" />
+          <span class="add-cart">Add Cart</span>
+        </button>
+      `;
+
+      btn.querySelector(".btn-add").addEventListener("click", handleClick);
+    });
+  });
 }
 
 document.querySelectorAll(".container-btn").forEach((btn) => {

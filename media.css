@@ -1,7 +1,7 @@
 /* Responsividade */
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
   .plate {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 3fr));
+    grid-template-columns: repeat(2, 0.5fr);
   }
 }
 
@@ -9,23 +9,48 @@
   .content-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 0;
+  }
+
+  .card {
+    padding: 0;
+  }
+
+  .plate {
+    padding: 0;
   }
 
   .container-payment {
-    width: 100%;
+    width: 70%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 375px) {
   .title {
     font-size: 2rem;
   }
   .btn-add {
     font-size: 0.9rem;
-    padding: 8px 12px;
   }
   .container-cart-empty img {
     width: 70%;
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+  }
+
+  .plate {
+    padding: 0;
+  }
+
+  .card {
+    padding: 0;
   }
 }
