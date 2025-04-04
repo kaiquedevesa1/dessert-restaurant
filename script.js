@@ -45,11 +45,11 @@ function updateButton(btnAdd, cartItem) {
   btnAdd.innerHTML = `
     <div class='add-item'>
         <div class='container-decrement'>
-            <img class='decrement' src='./image/icon-decrement-quantity.svg'/>
+            <img class='decrement' src='../image/icon-decrement-quantity.svg'/>
         </div>
         <div class='quantity'>${cartItem.quantity}</div>
         <div class='container-increment'>
-            <img class="increment" src="./image/icon-increment-quantity.svg" /> 
+            <img class="increment" src="../image/icon-increment-quantity.svg" /> 
         </div>  
     </div>`;
 
@@ -96,7 +96,7 @@ function removeItem(id) {
 
     btnAdd.innerHTML = `
       <button class="btn-add">
-        <img src="./image/icon-add-to-cart.svg" alt="add cart" />
+        <img src="../image/icon-add-to-cart.svg" alt="add cart" />
         <span class="add-cart">Add Cart</span>
       </button>
     `;
@@ -111,7 +111,7 @@ function updateCartDisplay() {
   if (cartItems.length === 0) {
     cartContainer.innerHTML = `<h2 class="title-empty">Your Cart(0)</h2>
      <div class="cart-empty">
-          <img src="/image/illustration-empty-cart.svg" alt="" />
+          <img src="../image/illustration-empty-cart.svg" alt="" />
           <p>Your added items will appear here</p>
         </div>`;
   } else {
@@ -145,7 +145,7 @@ function updateCartDisplay() {
                   <div class="button-remove" onclick="removeItem('${
                     item.id
                   }')"> 
-                    <img src ="./image/icon-remove-item.svg" class ="remove-item"> 
+                    <img src ="../image/icon-remove-item.svg" class ="remove-item"> 
                   </div> 
                 </div>`
             )
@@ -157,7 +157,7 @@ function updateCartDisplay() {
         </div>
       </div>
       <div class="carbon">
-        <img src="/image/icon-carbon-neutral.svg">
+        <img src="../image/icon-carbon-neutral.svg">
         <p>This is a <span>carbon-neutral</span> delivery</p>
       </div>
       <div class="confirm-order">
@@ -200,7 +200,7 @@ function confirmOrder() {
 
       btn.innerHTML = `
         <button class="btn-add">
-          <img src="./image/icon-add-to-cart.svg" alt="add cart" />
+          <img src="../image/icon-add-to-cart.svg" alt="add cart" />
           <span class="add-cart">Add Cart</span>
         </button>
       `;
